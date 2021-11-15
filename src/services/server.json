@@ -9,7 +9,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "electric",
+      "fuel_type": "electric_motor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
       "accessories": [
         {
@@ -280,7 +280,12 @@
         "2021-05-30",
         "2021-06-16",
         "2021-06-17",
-        "2021-06-18"
+        "2021-06-18",
+        "2021-11-06",
+        "2021-11-07",
+        "2021-11-08",
+        "2021-11-09",
+        "2021-11-10"
       ]
     },
     {
@@ -358,7 +363,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric",
+        "fuel_type": "electric_motor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -505,7 +510,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric",
+        "fuel_type": "electric_motor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -1421,7 +1426,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric",
+        "fuel_type": "electric_motor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {

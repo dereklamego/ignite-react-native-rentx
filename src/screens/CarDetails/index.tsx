@@ -5,12 +5,7 @@ import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Button } from '../../components/Button';
 
-import speedSvg from '../../assets/speed.svg'
-import accelerationSvg from '../../assets/acceleration.svg'
-import forceSvg from '../../assets/force.svg'
-import gasolineSvg from '../../assets/gasoline.svg'
-import exchangeSvg from '../../assets/exchange.svg'
-import peopleSvg from '../../assets/people.svg'
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import {
   Container,
@@ -35,23 +30,35 @@ interface Params{
   car: CarDTO
 }
 
+interface NavigationProps{
+  goBack?: () => void,
+  navigate:(
+    screen?: string,
+    carObject?:{
+      car: CarDTO
+    }
+  ) => void
+}
+
 export function CarDetails(){
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
   const route = useRoute();
   const {car} = route.params as Params;
-  
+
+  console.log(typeof car)
+
   function handleConfirmRental(){
-    navigation.navigate('Scheduling')
+    navigation.navigate('Scheduling',{car})
   }
 
   function handleBack(){
     navigation.goBack();
   }
-
+  
   return (
     <Container>
        <StatusBar
-        style='inverted'
+        style='dark'
         translucent
         backgroundColor='transparent'
       />
@@ -85,18 +92,14 @@ export function CarDetails(){
                <Accessory 
                   key={accessory.type} 
                   name={accessory.name} 
-                  icon={speedSvg} 
+                  icon={getAccessoryIcon(accessory.type)} 
               />
             ))
 
           }
         </Accessories>
           
-        <About>
-        Este é automóvel desportivo. Surgiu do lendário 
-        touro de lide indultado na praça Real Maestranza de Sevilla. 
-        É um belíssimo carro para quem gosta de acelerar.
-        </About>
+        <About>{car.about} </About>
 
       </Content>
 
