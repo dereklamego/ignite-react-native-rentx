@@ -46,8 +46,6 @@ import {
 } from './styles';
 import { Alert } from 'react-native';
 
-
-
 interface Params{
   car: CarDTO;
   dates: string[];
@@ -59,6 +57,7 @@ interface RentalPeriod{
 }
 
 export function SchedulingDetails(){
+  const [loading, setLoading] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
 
   const navigation = useNavigation();
@@ -70,6 +69,7 @@ export function SchedulingDetails(){
 
 
   async function handleConfirmRental(){
+    setLoading(true)
     const scheduleByCar = await api.get(`/schedules_bycars/${car.id}`)
 
     const unavailable_dates =[
@@ -77,13 +77,24 @@ export function SchedulingDetails(){
       ...dates
     ]
 
+    await api.post('schedules_byuser',{
+      user_id:1,
+      car,
+      startDate: format(getPlatformDate( parseISO(dates[0])),'dd/MM/yyyy'),
+      endDate: format(getPlatformDate( parseISO(dates[dates.length -1])),'dd/MM/yyyy')
+    })
+
     api.put(`/schedules_bycars/${car.id}`,{
       id: car.id,
       unavailable_dates
     })
     .then(()=>  navigation.navigate('SchedulingComplete'))
-    .catch(() => Alert.alert("Não foi possível confimar o agendamento"))
-
+    .catch(() => {
+      setLoading(false)
+      Alert.alert("Não foi possível confimar o agendamento")
+      
+    })
+    
   }
 
   function handleBack(){
@@ -101,7 +112,7 @@ export function SchedulingDetails(){
   return (
     <Container>
        <StatusBar
-        style='inverted'
+        style='dark'
         translucent
         backgroundColor='transparent'
       />
@@ -186,6 +197,8 @@ export function SchedulingDetails(){
           title={'Alugar agora'} 
           onPress={handleConfirmRental}
           color={theme.colors.success}
+          enabled={!loading}
+          loading={loading}
         />
       </Footer>
     </Container>

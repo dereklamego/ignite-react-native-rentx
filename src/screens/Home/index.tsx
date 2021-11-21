@@ -43,7 +43,7 @@ export function Home(){
   }
 
   function handleOpenMyCars(){
-    navigation.navigate('CarDetails')
+    navigation.navigate('MyCars')
   }
 
   useEffect(()=>{
