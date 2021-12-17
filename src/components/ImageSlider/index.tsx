@@ -1,4 +1,5 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 
 import {
   Container,
@@ -24,10 +25,19 @@ export function ImageSlider({imagesUrl}:Props){
       </ImageIndexes>
 
       <CarImageWrapper>
-        <CarImage
-          source={{uri:imagesUrl[0]}}
-          resizeMode = 'contain'
+        <FlatList
+          data={imagesUrl}
+          keyExtractor={key=>key}
+          renderItem={({item})=>(
+            <CarImage
+              source={{uri:item}}
+              resizeMode = 'contain'
+            />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
         />
+       
           
       </CarImageWrapper>
 

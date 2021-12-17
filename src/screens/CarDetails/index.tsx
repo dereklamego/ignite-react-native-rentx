@@ -98,6 +98,8 @@ export function CarDetails(){
         </Accessories>
           
         <About>{car.about} </About>
+        <About>{car.about} </About>
+        <About>{car.about} </About>
 
       </Content>
 

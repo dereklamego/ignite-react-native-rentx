@@ -102,17 +102,17 @@ export function MyCars(){
                 <Car data={item.car}/>
 
                 <CarFooter>
-                  <CarFooterTitle>{item.startDate}</CarFooterTitle>
+                  <CarFooterTitle>Período</CarFooterTitle>
 
                   <CarFooterPeriod>
-                    <CarFooterDate>18/06/2021</CarFooterDate>
+                    <CarFooterDate>{item.startDate}</CarFooterDate>
                     <AntDesign
                       name="arrowright"
                       size={20}
                       color={theme.colors.title}
                       style={{marginHorizontal:10}}
                     />
-                    <CarFooterDate>{item.startDate}</CarFooterDate>
+                    <CarFooterDate>{item.endDate}</CarFooterDate>
                   </CarFooterPeriod>
 
                 </CarFooter>
