@@ -9,10 +9,12 @@ import api from '../../services/api';
 import Logo from '../../assets/logo.svg';
 
 import {StyleSheet, BackHandler} from 'react-native';
-
 import { useTheme } from 'styled-components';
+
 import { Car } from '../../components/Car';
-import { Load } from '../../components/Load';
+import { LoadAnimation } from '../../components/LoadAnimation';
+
+
 import { PanGestureHandler, RectButton } from 'react-native-gesture-handler'; //componente para identificar quando o usuario está segurando e arrastando o componente 
 import Animated, {
   useSharedValue,
@@ -129,7 +131,7 @@ export function Home(){
         </HeaderContent> 
 
       </Header>
-      { loading? <Load/> :
+      { loading? <LoadAnimation/> :
         <CarList
           data={cars}
           keyExtractor={item => item.id}
