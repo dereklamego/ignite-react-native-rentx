@@ -14,16 +14,31 @@ import {
 
 } from './styles'
 import { StatusBar } from 'expo-status-bar';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
+interface Params{
+  title: string;
+  message: string;
+  nextScreenRoute: string
+}
 
-export function SchedulingComplete(){
+interface NavigateProps{
+  navigate:(
+    nextScreenRoute: string
+  ) => void
+  
+}
 
+export function Confirmation(){
+
+  const route = useRoute();
   const {width} = useWindowDimensions();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigateProps>();
+  const {title, message, nextScreenRoute} = route.params as Params;
 
   function handleConfirm(){
-    navigation.navigate('Home')
+    navigation.navigate(nextScreenRoute)
+    console.log(nextScreenRoute)
   }
 
   return (
@@ -39,12 +54,10 @@ export function SchedulingComplete(){
 
       <Content>
         <DoneSvg width={80} height={80}/>
-        <Title>Carro alugado!</Title>
+        <Title>{title}</Title>
 
         <Message>
-          Agora você só precisa ir {'\n'}
-          até a concessionária da RENTX {'\n'}
-          pegar seu automóvel.
+         {message}
         </Message>
       </Content>
 
