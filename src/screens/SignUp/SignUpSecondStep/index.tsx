@@ -11,7 +11,6 @@ import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { PasswordInput } from '../../../components/PasswordInput';
 import {Button} from '../../../components/Button';
-import { Confirmation } from '../../Confirmation';
 
 import{
   Container,
@@ -22,6 +21,7 @@ import{
   Form,
   FormTitle
 }from './styles';
+import api from '../../../services/api';
 
 interface Params{
   user:{
@@ -40,7 +40,7 @@ export function SignUpSecondStep(){
 
   const {user} = route.params as Params;
   
-  function handleRegister(){
+  async function handleRegister(){
     if(!password || !passwordConfirm){
       return Alert.alert('Informe a senha e a confirmação')
     }
@@ -49,11 +49,25 @@ export function SignUpSecondStep(){
       return Alert.alert('As senhas não são iguais')
     }
 
-    navigation.navigate('Confirmation',{
-      nextScreenRoute: 'SignIn',
-      title:'Conta Criada!',
-      message: `Agora é só fazer login\ne aproveitar`
+    await api.post('/users',{
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password
     })
+    .then(()=>{
+      navigation.navigate('Confirmation',{
+        nextScreenRoute: 'SignIn',
+        title:'Conta Criada!',
+        message: `Agora é só fazer login\ne aproveitar`
+      })
+    })
+    .catch((error)=>{
+        console.log(error)
+        Alert.alert('Opa','Não foi possível cadastrar')
+    })
+ 
+   
 
   }
 
