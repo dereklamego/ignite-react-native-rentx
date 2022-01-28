@@ -8,7 +8,7 @@ import api from '../../services/api';
 
 import Logo from '../../assets/logo.svg';
 
-import {StyleSheet, BackHandler} from 'react-native';
+import {StyleSheet} from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { Car } from '../../components/Car';
@@ -23,7 +23,8 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated';
 
-const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
+//BOTÃO FLUTUANTE
+//const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 import {
   Container,
@@ -52,14 +53,15 @@ export function Home(){
   const positionY = useSharedValue(0);
   const positionX = useSharedValue(0);
 
-  const myCarsButtonStyle = useAnimatedStyle(()=>{
-    return{
-      transform: [
-        {translateX: positionX.value},
-        {translateY: positionY.value},
-      ]
-    }
-  })
+  // ESTILO DO BOTÃO FLUTUANTE
+  // const myCarsButtonStyle = useAnimatedStyle(()=>{
+  //   return{
+  //     transform: [
+  //       {translateX: positionX.value},
+  //       {translateY: positionY.value},
+  //     ]
+  //   }
+  // })
 
   const onGestureEvent = useAnimatedGestureHandler({
     onStart(_,ctx: any){ // como any pq escolhemos oq vamos colocar nele
@@ -79,10 +81,10 @@ export function Home(){
   function handleCarDetails(car: CarDTO){
     navigation.navigate('CarDetails',{car})
   }
-
-  function handleOpenMyCars(){
-    navigation.navigate('MyCars')
-  }
+  // BFUNÇÃO BOTAO FLUANTE
+  // function handleOpenMyCars(){
+  //   navigation.navigate('MyCars')
+  // }
 
   useEffect(()=>{
 
@@ -99,12 +101,6 @@ export function Home(){
 
     }
     fetchCars();
-  },[])
-
-  useEffect(()=>{
-    BackHandler.addEventListener('hardwareBackPress',()=>{
-      return true
-    })
   },[])
 
   return (
@@ -140,7 +136,8 @@ export function Home(){
           }
         />
       }
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
+      {/* BOTÃO FLUTUANTE 
+       <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View style={[
           myCarsButtonStyle,
           {
@@ -161,7 +158,7 @@ export function Home(){
             />
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
     </Container>
   );
 }
